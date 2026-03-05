@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 function Home() {
   return (
-    <section>
+    <section className='home'>
       <div className='logo-esquerda'>
         <motion.img  
           layoutId="main-logo" 

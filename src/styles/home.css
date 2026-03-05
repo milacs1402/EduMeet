@@ -19,7 +19,7 @@ body{
 	align-items:center;
 }
 
-section{
+.home{
     height: 90vh;
     width: max-content;
     display: grid;
