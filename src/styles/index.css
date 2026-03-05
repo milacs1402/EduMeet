@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  /* Cores */
+  --azul-fundo: #0768CD;
+  --branco: #FCFEFD;
+  --azul-detail: #3A9AF8;
+  --texto: #2E1B1B;
+  
+  /* Tipografia */
+  --font-titulos: 'Concert One', serif;
+  --font-corpo: 'Inter', sans-serif;
+
+  font-family: var(--font-corpo);
+  height: 100%;
+
+  background-color: var(--azul-fundo);
+
+  #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  }
+}
+
+
+
+
+
