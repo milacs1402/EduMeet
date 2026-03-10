@@ -1,0 +1,161 @@
+:root {
+  /* Cores */
+  --azul-fundo: #0252A5;
+  --branco: #FCFEFD;
+  --azul-detail: #3A9AF8;
+  --texto: #2E1B1B;
+  
+  /* Tipografia */
+  --font-titulos: 'Concert One', serif;
+  --font-corpo: 'Inter', sans-serif;
+}
+
+.cadastro{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--branco);
+    width: 88vw;
+    height: 90vh;
+    border-radius: 2rem;
+    align-items: flex-start;
+    min-width: 0;
+    overflow: auto;
+}
+
+.cadastro h2{
+    font-family: var(--font-titulos);
+    margin-left: 5rem;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+form{
+    width: calc(100% - 10rem);
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 3rem 5rem 1rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nome, .registros, .telefone{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    max-width: 30rem;
+    width: 100%;
+}
+
+.form-buttons{
+    margin-top: 1rem;
+    grid-column: span 2;
+}
+
+.form-buttons input{
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--azul-detail);
+    width: 12rem;
+    height: 2.2rem;
+    margin: 1rem 2rem 0 1rem;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    color: var(--branco);
+}
+
+.voltar {
+    grid-column: 1;
+    width: 8rem;
+    height: 2rem;
+    margin-top: -1rem;
+    margin-left: -3rem;
+    border: 0.5px solid black;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #e4e3e3;
+    align-content: center;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voltar:hover{
+    opacity: 90%;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+#button:hover{
+    opacity: 70%;
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
+
+.esquerda{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+}
+
+.esquerda input{
+    max-width: 20rem;
+    width: 100%;
+    height: 2rem;
+    border-radius: 0.3rem;
+}
+
+#address{
+    width: 100%;
+}
+
+.direita{
+    align-content: center;
+    border-radius: 2rem;
+    background-color: #f0f0f0;
+    height: 20rem;
+    width: 100%;
+    max-width: 18rem;    
+    margin-left: auto;
+}
+
+/* resposividade */
+
+@media (max-width: 768px) {
+    .cadastro h2 {
+        margin-left: 1.5rem;
+        font-size: 1.8rem;
+    }
+
+    form {
+        grid-template-columns: 1fr; 
+        width: calc(100% - 3rem);
+        margin: 2rem 1.5rem;
+    }
+
+    .direita {
+        margin-left: 0;
+        max-width: 100%;
+        height: 14rem;
+    }
+
+    .form-buttons {
+        grid-column: span 1;
+        margin-bottom: 2rem;
+    }
+
+    .voltar {
+        margin-left: 0;
+    }
+}
+
