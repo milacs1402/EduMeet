@@ -1,0 +1,97 @@
+:root {
+  /* Cores */
+  --azul-fundo: #0252A5;
+  --branco: #FCFEFD;
+  --azul-detail: #3A9AF8;
+  --texto: #2E1B1B;
+  
+  /* Tipografia */
+  --font-titulos: 'Concert One', serif;
+  --font-corpo: 'Inter', sans-serif;
+}
+
+.dados-section{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--branco);
+    width: 88vw;
+    height: 90vh;
+    border-radius: 2rem;
+    align-items: flex-start;
+    min-width: 0;
+    overflow: auto;
+}
+
+.area-dados{
+    width: calc(100% - 10rem);
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 3rem 5rem 1rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.direita-dados{
+    align-content: center;
+    border-radius: 2rem;
+    background-color: #f0f0f0;
+    height: 20rem;
+    width: 100%;
+    max-width: 18rem;    
+    margin-left: auto;
+}
+
+.esquerda-dados{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-buttons-dados{
+    margin-top: 1rem;
+    grid-column: span 2;
+}
+
+.form-buttons-dados button{
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--azul-detail);
+    width: 12rem;
+    height: 2.2rem;
+    margin: 1rem 2rem 0 1rem;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    color: var(--branco);
+    text-align: center;
+}
+
+.voltar-dados {
+    grid-column: 1;
+    width: 8rem;
+    height: 2rem;
+    margin: 1rem 3rem;
+    border: 0.5px solid black;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #e4e3e3;
+    align-content: center;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voltar-dados:hover{
+    opacity: 90%;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+button:hover{
+    opacity: 70%;
+    transform: scale(1.01);
+    cursor: pointer;
+}
+

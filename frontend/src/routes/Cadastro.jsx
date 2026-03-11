@@ -53,33 +53,57 @@ function Cadastro() {
       <h2>Preencha as informações abaixo:</h2>
 
       <form onSubmit={handleSubmit}>
+
         <div className='esquerda'>
+
           <div className='nome'>
+
             <input type="text" id='name'     name="name"    required   placeholder='Nome'  value={form.name}     onChange={handleChange}/>
+
             <input type="text" id='lastname' name="lastname"  required   placeholder='Sobrenome' value={form.lastname} onChange={handleChange}/>
+
           </div>
         
           <div className='registros'>
+
             <input type="text" id='RA' name="ra" required   placeholder='RA' value={form.ra} onChange={handleChange}/>
+
             <input type="text" id='RG' name="rg" required   placeholder='RG' value={form.rg} onChange={handleChange}/>
+
           </div>
+
           <div className='telefone'>
+
             <input type="text" id="cel1" name="cel1" required   placeholder='Telefone 1' value={form.cel1} onChange={handleChange}/>
+
             <input type="text" id="cel2" name="cel2"  placeholder='Telefone 2' value={form.cel2} onChange={handleChange}/>
+
           </div>
+
           <input type="email" id='email'   name="email"    required   placeholder='Email' value={form.email} onChange={handleChange}/>
+
           <input type="text"  id="address" name="end"  required   placeholder='Endereço' value={form.end} onChange={handleChange}/>
+
           <input type="text"  id="CEP"     name="cep"       required   placeholder='CEP' value={form.cep} onChange={handleChange}/>
+
           <input type="date"  id="bday"    name="bday" required   value={form.bday} onChange={handleChange} />
+
         </div>
+
         <div className='direita'>
+
           <p>Envie uma foto:</p>
+
           <input type="file" id="imagem" name="imagem" accept="image/*"/>
+
         </div>
 
         <div className='form-buttons'>
+
             <input type="submit" id='button' value='Cadastrar'/>
+
             <input type="button" id='button' value='Limpar'onClick={handleReset}/>
+            
         </div>
 
         <Link className='voltar' to='/home'>Voltar ao início</Link>

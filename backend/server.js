@@ -58,6 +58,37 @@ app.post('/cadastro', async (req, res) => {
   }
 });
 
+app.get('/alunos', async (req, res) => {
+  const { busca } = req.query;
+
+  try {
+    const [rows] = await db.execute(
+      `SELECT * FROM Alunos_unesp 
+       WHERE name LIKE ? OR ra LIKE ?`,
+      [`%${busca}%`, `%${busca}%`]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao buscar.' });
+  }
+});
+
+app.get('/alunos/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [rows] = await db.execute(
+      'SELECT * FROM Alunos_unesp WHERE id_aluno = ?',
+      [id]
+    );
+    res.json(rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao buscar aluno.' });
+  }
+});
+
 // Inicia o servidor na porta definida no .env 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor rodando na porta ${process.env.PORT}`);

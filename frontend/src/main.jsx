@@ -6,6 +6,7 @@ import Home from './routes/Home.jsx'
 import Cadastro from './routes/Cadastro.jsx'
 import Cover from './routes/Cover.jsx'
 import Busca from './routes/Busca.jsx'
+import DadosAluno from './routes/DadosAluno.jsx'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "busca",
     element: <Busca />
+  },
+  {
+    path: "dados-aluno/:id",
+    element: <DadosAluno />
   }
 ])
 
