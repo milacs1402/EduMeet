@@ -33,9 +33,9 @@ Sistema de cadastro e gerenciamento de alunos. O objetivo do projeto não é ser
 - [x] Cadastro de alunos
 - [x] Validação de campos obrigatórios
 - [x] Validação de RA e RG duplicados
-- [ ] Busca de alunos por nome ou RA
-- [ ] Editar cadastro
-- [ ] Excluir cadastro
+- [x] Busca de alunos por nome ou RA
+- [x] Editar cadastro
+- [X] Excluir cadastro
 
 ## Status
 
