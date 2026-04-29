@@ -12,15 +12,10 @@ function Busca() {
 
     useEffect(() => {
 
-        if(busca ===''){
-            setResultados([]);
-            return;
-        }
-
         fetch(`http://localhost:3001/alunos?busca=${busca}`)
-        .then(res => res.json())
-        .then(data => setResultados(data))
-        .catch(err => console.error(err));
+            .then(res => res.json())
+            .then(data => setResultados(data))
+            .catch(err => console.error(err));
 
     }, [busca]);
 

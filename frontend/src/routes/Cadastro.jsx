@@ -9,21 +9,36 @@ function Cadastro() {
     name: '', lastname: '', ra: '', rg: '',
     cel1: '', cel2: '', email: '', end: '', cep: '', bday: ''
   });
+  const [foto, setFoto] = useState(null);
 
   // Atualiza o campo certo conforme o usuário digita
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleFoto = (e) => {
+    setFoto(e.target.files[0]);
+  };
+
   // Envia os dados para o servidor quando o form é submetido
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // FormData envia texto e arquivo juntos
+    const formData = new FormData();
+
+    // adiciona cada campo do form
+    Object.keys(form).forEach(campo => {
+      formData.append(campo, form[campo]);
+    });
+
+    // adiciona a foto
+    if (foto) formData.append('foto', foto);
+
     try {
       const resposta = await fetch('http://localhost:3001/cadastro', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: formData
       });
 
       const data = await resposta.json();
@@ -94,13 +109,13 @@ function Cadastro() {
 
           <p>Envie uma foto:</p>
 
-          <input type="file" id="imagem" name="imagem" accept="image/*"/>
+          <input type="file" id="foto" name="foto" accept="image/*" onChange={handleFoto}/>
 
         </div>
 
         <div className='form-buttons'>
 
-            <input type="submit" id='button' value='Cadastrar'/>
+            <Link to='/Home'><input type="submit" id='button' value='Cadastrar'/></Link>
 
             <input type="button" id='button' value='Limpar'onClick={handleReset}/>
             

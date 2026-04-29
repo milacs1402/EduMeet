@@ -1,8 +1,23 @@
-// Importa os pacotes instalados (igual ao import do React)
 const express = require('express');
 const cors = require('cors');
 const db = require('./db'); // a "tomada" no db.js
 require('dotenv').config(); // lê o arquivo .env
+const multer = require('multer');
+const path = require('path');
+
+// Define onde salvar e o nome do arquivo
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // pasta onde as fotos ficam salvas
+  },
+  filename: (req, file, cb) => {
+    // nome do arquivo: timestamp + extensão original
+    // ex: 1714000000000.jpg
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage });
 
 // Cria o servidor
 const app = express();
@@ -10,12 +25,13 @@ const app = express();
 // Middlewares — funções que rodam em TODO pedido antes de chegar na rota
 app.use(cors());         // libera o React (porta 3000) acessar o servidor
 app.use(express.json()); // permite ler o corpo JSON que o React envia
+app.use('/uploads', express.static('uploads')); // permite acessar os arquivos uploads
 
-// Define uma rota — quando o React fizer um POST para /cadastro, essa função roda
 // req = o pedido que chegou (contém os dados do form)
 // res = a resposta que você vai enviar de volta
-app.post('/cadastro', async (req, res) => {
+app.post('/cadastro', upload.single('foto'), async (req, res) => {
   const { name, lastname, ra, rg, cel1, cel2, email, end, cep, bday } = req.body;
+  const foto = req.file ? req.file.filename : null;
 
    // Campos obrigatórios
   const obrigatorios = { name, lastname, ra, rg, cel1, email, end, cep, bday };
@@ -45,9 +61,9 @@ app.post('/cadastro', async (req, res) => {
 
     // Se não existe, cadastra normalmente
     const [result] = await db.execute(
-      `INSERT INTO Alunos_unesp (name, lastname, ra, rg, cel1, cel2, email, end, cep, bday) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [name, lastname, ra, rg, cel1, cel2, email, end, cep, bday]
+      `INSERT INTO Alunos_unesp (name, lastname, ra, rg, cel1, cel2, email, end, cep, bday, foto) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [name, lastname, ra, rg, cel1, cel2, email, end, cep, bday, foto]
     );
 
     res.status(201).json({ mensagem: 'Cadastrado com sucesso!', id: result.insertId });
@@ -64,8 +80,9 @@ app.get('/alunos', async (req, res) => {
   try {
     const [rows] = await db.execute(
       `SELECT * FROM Alunos_unesp 
-       WHERE name LIKE ? OR ra LIKE ?`,
-      [`%${busca}%`, `%${busca}%`]
+       WHERE name LIKE ? OR ra LIKE ?
+       ORDER BY name ASC`,
+      [`%${busca || ''}%`, `%${busca || ''}%`]
     );
     res.json(rows);
   } catch (err) {
@@ -86,6 +103,43 @@ app.get('/alunos/:id', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ mensagem: 'Erro ao buscar aluno.' });
+  }
+});
+
+app.delete('/alunos/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try{
+    const [result] = await db.execute(
+      'DELETE FROM Alunos_unesp WHERE id_aluno = ?',
+      [id]
+    );
+
+    res.json({ mensagem: 'Aluno excluído com sucesso.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao excluir aluno.' });
+  }
+});
+
+app.put('/alunos/:id', upload.single('foto'), async (req, res) => {
+  const { id } = req.params;
+  const { name, lastname, ra, rg, cel1, cel2, email, end, cep, bday } = req.body;
+
+  // se enviou foto nova, usa ela — senão mantém a que já estava
+  const foto = req.file ? req.file.filename : req.body.fotoAtual;
+
+  try {
+    await db.execute(
+      `UPDATE Alunos_unesp SET 
+        name=?, lastname=?, ra=?, rg=?, cel1=?, cel2=?, email=?, end=?, cep=?, bday=?, foto=?
+       WHERE id_aluno=?`,
+      [name, lastname, ra, rg, cel1, cel2, email, end, cep, bday, foto, id]
+    );
+    res.json({ mensagem: 'Atualizado com sucesso!' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ mensagem: 'Erro ao atualizar.' });
   }
 });
 
