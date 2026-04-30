@@ -36,7 +36,7 @@ function Cadastro() {
     if (foto) formData.append('foto', foto);
 
     try {
-      const resposta = await fetch('http://localhost:3001/cadastro', {
+      const resposta = await fetch(`${import.meta.env.VITE_API_URL}/cadastro`, {
         method: 'POST',
         body: formData
       });
@@ -51,7 +51,7 @@ function Cadastro() {
 
       alert(data.mensagem); // "Cadastrado com sucesso!"
 
-    } catch (err) {
+    } catch {
       alert('Erro ao conectar com o servidor.');
     }
   };

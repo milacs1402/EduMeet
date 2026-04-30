@@ -19,7 +19,7 @@ function DadosAluno() {
         if (!confirmacao) return;
 
         try{
-            const response = await fetch(`http://localhost:3001/alunos/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/alunos/${id}`, {
                 method: 'DELETE'
         });
 
@@ -74,7 +74,7 @@ function DadosAluno() {
         }
 
         try {
-            const resposta = await fetch(`http://localhost:3001/alunos/${id}`, {
+            const resposta = await fetch(`${import.meta.env.VITE_API_URL}/alunos/${id}`, {
             method: 'PUT',
             body: formData // sem Content-Type!
             });
@@ -83,13 +83,13 @@ function DadosAluno() {
             alert(data.mensagem);
             setAluno({ ...form, foto: fotoNova ? URL.createObjectURL(fotoNova) : aluno.foto });
             setEditMode(false);
-        } catch (err) {
+        } catch {
             alert('Erro ao salvar.');
         }
     };
 
     useEffect(() => {
-        fetch(`http://localhost:3001/alunos/${id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/alunos/${id}`)
         .then(res => res.json())
         .then(data => setAluno(data))
         .catch(err => console.error(err));
@@ -156,7 +156,7 @@ function DadosAluno() {
                 ) : (
                     <div className='direita-dados'>
                         {aluno.foto? (
-                            <img src={`http://localhost:3001/uploads/${aluno.foto}`} alt="Foto do aluno" className="foto-aluno"/>
+                            <img src={`${import.meta.env.VITE_API_URL}/uploads/${aluno.foto}`} alt="Foto do aluno" className="foto-aluno"/>
                         ) : (
                             <p>Aluno sem foto cadastrada</p>
                         )}

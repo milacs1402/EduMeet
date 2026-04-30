@@ -12,7 +12,7 @@ function Busca() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:3001/alunos?busca=${busca}`)
+        fetch(`${import.meta.env.VITE_API_URL}/alunos?busca=${busca}`)
             .then(res => res.json())
             .then(data => setResultados(data))
             .catch(err => console.error(err));
