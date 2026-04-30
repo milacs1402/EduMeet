@@ -115,7 +115,7 @@ function Cadastro() {
 
         <div className='form-buttons'>
 
-            <Link to='/Home'><input type="submit" id='button' value='Cadastrar'/></Link>
+            <input type="submit" id='button' value='Cadastrar'/>
 
             <input type="button" id='button' value='Limpar'onClick={handleReset}/>
             
