@@ -3,6 +3,7 @@ import '../styles/cover.css'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import EduIcon from '../assets/EduIcon.png';
 
 function Cover() {
 
@@ -12,7 +13,7 @@ function Cover() {
     <div className='cover-div'>
       <motion.img  
         layoutId="main-logo" 
-        src="src\assets\EduIcon.png" 
+        src={EduIcon}
         alt="Logo do Site"
         animate={{
           scale: [1, 1.1, 1, 1.1, 1], 
