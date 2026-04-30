@@ -2,8 +2,10 @@ import React from 'react'
 import '../styles/cadastro.css'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Cadastro() {
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     name: '', lastname: '', ra: '', rg: '',
@@ -50,7 +52,8 @@ function Cadastro() {
       }
 
       alert(data.mensagem); // "Cadastrado com sucesso!"
-
+      navigate(`/dados-aluno/${data.id}`);
+      
     } catch {
       alert('Erro ao conectar com o servidor.');
     }
