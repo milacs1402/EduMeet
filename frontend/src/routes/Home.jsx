@@ -1,6 +1,9 @@
 import React from 'react'
 import '../styles/home.css'
 import { Link } from 'react-router-dom'
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+import EduIcon from '../assets/EduIcon.png';
 
 function Home() {
   return (
@@ -8,7 +11,7 @@ function Home() {
       <div className='logo-esquerda'>
         <motion.img  
           layoutId="main-logo" 
-          src="src\assets\EduIcon.png" 
+          src={EduIcon} 
           alt="Logo do Site" 
           transition={{ type: "tween", stiffness: 0, damping: 15 }}
           />
