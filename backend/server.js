@@ -5,8 +5,8 @@ require('dotenv').config(); // lê o arquivo .env
 const multer = require('multer');
 const path = require('path');
 
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multerStorageCloudinary = require('multer-storage-cloudinary');
+const CloudinaryStorage = multerStorageCloudinary.CloudinaryStorage;
 
 // Configura o Cloudinary com as credenciais do .env
 cloudinary.config({
