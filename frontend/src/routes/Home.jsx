@@ -1,8 +1,7 @@
 import React from 'react'
 import '../styles/home.css'
 import { Link } from 'react-router-dom'
-// eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import EduIcon from '../assets/EduIcon.png';
 
 function Home() {
