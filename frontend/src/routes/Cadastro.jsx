@@ -53,7 +53,7 @@ function Cadastro() {
 
       alert(data.mensagem); // "Cadastrado com sucesso!"
       navigate(`/dados-aluno/${data.id}`);
-      
+
     } catch {
       alert('Erro ao conectar com o servidor.');
     }
@@ -118,7 +118,7 @@ function Cadastro() {
 
         <div className='form-buttons'>
 
-            <input type="submit" id='button' value='Cadastrar'/>
+            <input type="submit" id='button' value='Cadastrar' onClick={handleSubmit}/>
 
             <input type="button" id='button' value='Limpar'onClick={handleReset}/>
             
