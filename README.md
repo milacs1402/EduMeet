@@ -38,5 +38,5 @@ Sistema de cadastro e gerenciamento de alunos. O objetivo do projeto não é ser
 - [X] Excluir cadastro
 
 ## Status
-
-🚧 Em desenvolvimento — projeto de estudos em andamento.
+Finalizado!
+Para acessar: https://edu-meet-six.vercel.app/
