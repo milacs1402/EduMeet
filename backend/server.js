@@ -5,16 +5,23 @@ require('dotenv').config(); // lê o arquivo .env
 const multer = require('multer');
 const path = require('path');
 
-// Define onde salvar e o nome do arquivo
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // pasta onde as fotos ficam salvas
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+// Configura o Cloudinary com as credenciais do .env
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Define o Cloudinary como destino do multer
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'edumeet', // pasta no Cloudinary
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
   },
-  filename: (req, file, cb) => {
-    // nome do arquivo: timestamp + extensão original
-    // ex: 1714000000000.jpg
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
 });
 
 const upload = multer({ storage });
@@ -25,13 +32,12 @@ const app = express();
 // Middlewares — funções que rodam em TODO pedido antes de chegar na rota
 app.use(cors());         // libera o React (porta 3000) acessar o servidor
 app.use(express.json()); // permite ler o corpo JSON que o React envia
-app.use('/uploads', express.static('uploads')); // permite acessar os arquivos uploads
 
 // req = o pedido que chegou (contém os dados do form)
 // res = a resposta que você vai enviar de volta
 app.post('/cadastro', upload.single('foto'), async (req, res) => {
   const { name, lastname, ra, rg, cel1, cel2, email, end, cep, bday } = req.body;
-  const foto = req.file ? req.file.filename : null;
+  const foto = req.file ? req.file.path : null;
 
    // Campos obrigatórios
   const obrigatorios = { name, lastname, ra, rg, cel1, email, end, cep, bday };
@@ -127,7 +133,7 @@ app.put('/alunos/:id', upload.single('foto'), async (req, res) => {
   const { name, lastname, ra, rg, cel1, cel2, email, end, cep, bday } = req.body;
 
   // se enviou foto nova, usa ela — senão mantém a que já estava
-  const foto = req.file ? req.file.filename : req.body.fotoAtual;
+  const foto = req.file ? req.file.path : req.body.fotoAtual;
 
   try {
     await db.execute(

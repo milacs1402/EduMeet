@@ -156,7 +156,7 @@ function DadosAluno() {
                 ) : (
                     <div className='direita-dados'>
                         {aluno.foto? (
-                            <img src={`${import.meta.env.VITE_API_URL}/uploads/${aluno.foto}`} alt="Foto do aluno" className="foto-aluno"/>
+                            <img src={aluno.foto} alt="Foto do aluno" className="foto-aluno"/>
                         ) : (
                             <p>Aluno sem foto cadastrada</p>
                         )}
